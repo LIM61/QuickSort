@@ -1,0 +1,43 @@
+// QuickSort: carries out Quicksort
+public class QuickSort {
+
+
+   public void swapRef(double a[], int i, int j) {
+      double temp = a[i];
+      a[i] = a[j];
+      a[j] = temp;
+   }
+
+   public void quicksort(double a[]) {
+      quicksort(a, 0, a.length - 1);
+   }
+
+   public void quicksort(double a[], int low, int high) {
+      // System.out.print("In Quicksort: " + low + " " + high + ", ");
+      // printArray(); System.out.println();
+      if (high >low) {
+         int pivot = partition(a, low, high);
+         quicksort(a, low, pivot-1);
+         quicksort(a, pivot+1, high);
+       }
+   }
+   
+   public int partition(double a[], int low, int high) {
+      int left, right;
+      double pivot_item = a[low];
+      int pivot = left = low;
+      right = high;
+      while ( left < right ) {
+         while(left < a.length - 1 &&
+               a[left] <= pivot_item) // Move left while item < pivot
+            left++;
+         while(a[right] > pivot_item) // Move right while item > pivot
+            right--;
+         if (left < right) swapRef(a, left, right);
+      }
+      // right is final position for the pivot
+      a[low] = a[right];
+      a[right] = pivot_item;
+      return right;
+   }
+}
