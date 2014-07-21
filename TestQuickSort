@@ -1,0 +1,38 @@
+// QuickSortTest: test the QuickSort class
+	public class TestQuickSort {
+	   final static int SIZE = 5120000;
+	   private static double[] a = new double[SIZE]; // holds numbers to sort
+
+	   public static void main(String[] argv) {
+	      QuickSort q = new QuickSort();
+	      System.out.println("Number of items: " + SIZE);
+	      long startTime = System.currentTimeMillis();
+	      generateNumbers();
+	      elapsedTime(startTime, "After generating, ");
+	      q.quicksort(a);
+	      elapsedTime(startTime, "After sorting (quicksort), ");
+	      System.out.println("Sorted is " + checkSorted(a));
+	   }
+
+	   public static void generateNumbers() {
+	      for (int i = 0; i < a.length; i++) // generate numbers to sort
+	         a[i] = Math.random();
+	   }
+
+	   public static boolean checkSorted(double a[]) { // check if sorted
+	      for (int i = 0; i < a.length - 1; i++)
+	         if (a[i] >= a[i+1]) return false;
+	      return true;
+	   }
+
+	   public static void elapsedTime(long startTime, String s) {
+	      long stopTime = System.currentTimeMillis();
+	      double elapsedTime = ((double)(stopTime - startTime))/1000.0;
+	      System.out.println(s + "elapsed time: " + elapsedTime + " seconds");
+	   }
+}
+
+Number of items: 5120000
+After generating, elapsed time: 0.51 seconds
+After sorting (quicksort), elapsed time: 3.46 seconds
+Sorted is true
